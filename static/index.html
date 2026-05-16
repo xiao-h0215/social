@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>社恐练习室 - AI社交成长中心</title>
+    <link rel="stylesheet" href="styles_new.css" />
+  </head>
+  <body>
+    <div class="dynamic-bg"></div>
+    <div class="gradient-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="orb orb-4"></div>
+    </div>
+    <div class="particle-container" id="particleContainer"></div>
+    <main class="app-shell page-transition">
+      <section id="landingPage" class="landing-page">
+        <div class="landing-container">
+          <header class="landing-header">
+            <div class="landing-logo">
+              <div class="logo-icon">🌱</div>
+              <span class="logo-text">社交练习室</span>
+            </div>
+            <nav class="landing-nav">
+              <a href="#" class="nav-link">功能介绍</a>
+              <a href="#" class="nav-link">使用指南</a>
+              <a href="#" class="nav-link">关于我们</a>
+            </nav>
+          </header>
+
+          <main class="landing-main">
+            <h1 class="landing-title">
+              你不用变成外向的人，<br/>
+              也可以<span class="highlight">舒服地表达自己</span>。
+            </h1>
+            <p class="landing-subtitle">
+              一个帮助年轻人练习真实表达、<br/>
+              建立边界感与社交松弛感的 AI 空间。
+            </p>
+
+            <div class="ai-analysis-section">
+              <div class="ai-card">
+                <div class="card-icon">⚡</div>
+                <div class="card-label">今日社交能量</div>
+                <div class="card-value"><span class="percentage" id="landingEnergy">71</span>%</div>
+                <div class="card-description">适合低压力社交，慢慢来</div>
+              </div>
+              <div class="ai-card">
+                <div class="card-icon">💭</div>
+                <div class="card-label">AI 洞察</div>
+                <div class="card-value" style="font-size: 16px; font-weight: 500;">习惯性共情</div>
+                <div class="card-description">你总是先考虑别人的感受</div>
+              </div>
+              <div class="ai-card">
+                <div class="card-icon">🌱</div>
+                <div class="card-label">成长记录</div>
+                <div class="card-value" style="font-size: 16px; font-weight: 500;">+12%</div>
+                <div class="card-description">今天比昨天更敢表达了一点</div>
+              </div>
+            </div>
+
+            <div class="ai-chat-area">
+              <div class="ai-chat-bubble">
+                <div class="chat-avatar">
+                  <div class="chat-avatar-icon">🤖</div>
+                  <span class="chat-avatar-name">AI 陪伴</span>
+                </div>
+                <div class="chat-typing-indicator">
+                  <span class="typing-dot"></span>
+                  <span class="typing-dot"></span>
+                  <span class="typing-dot"></span>
+                </div>
+                <div class="chat-text" id="aiChatText">
+                  今天也不用强迫自己变外向。<span class="chat-cursor"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="landing-cta">
+              <button class="cta-button" id="enterAppBtn">
+                <span>进入我的空间</span>
+                <span class="cta-arrow">→</span>
+              </button>
+              <p class="cta-hint">随时可以重新开始，没有人会评价你</p>
+            </div>
+          </main>
+
+          <footer class="landing-footer">
+            <div class="features-preview">
+              <div class="feature-item">
+                <span class="feature-icon">💎</span>
+                <span>13+ 真实社交场景</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">🎤</span>
+                <span>AI 语音练习</span>
+              </div>
+              <div class="feature-item">
+                <span class="feature-icon">📊</span>
+                <span>成长数据追踪</span>
+              </div>
+            </div>
+            <p class="footer-text">© 2026 社交练习室 · 让表达成为力量</p>
+          </footer>
+        </div>
+      </section>
+      
+      <section id="startScreen" class="start-screen">
+        <div class="hero-section">
+          <div class="hero-bg"></div>
+          <div class="hero-content">
+            <div class="user-avatar">
+              <div class="avatar-circle" id="userAvatar">
+                <span class="avatar-icon" id="avatarIcon">�</span>
+              </div>
+              <div class="level-badge" id="levelBadge">Lv.1</div>
+            </div>
+            <h1 class="hero-title">AI社交成长中心</h1>
+            <div class="personality-tag" id="personalityTag">准备开始</div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card social-value-card">
+            <div class="stat-icon">💎</div>
+            <div class="stat-info">
+              <span class="stat-label">社交值</span>
+              <strong class="stat-value" id="socialValue">0</strong>
+            </div>
+          </div>
+          <div class="stat-card streak-card">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-info">
+              <span class="stat-label">连续打卡</span>
+              <strong class="stat-value" id="streakDays">0</strong>
+            </div>
+            <div class="stat-unit">天</div>
+          </div>
+          <div class="stat-card mood-card">
+            <div class="stat-icon" id="moodIcon">😊</div>
+            <div class="stat-info">
+              <span class="stat-label">当前状态</span>
+              <strong class="stat-value" id="moodStatus">准备开始</strong>
+            </div>
+          </div>
+          <div class="stat-card coin-card">
+            <div class="stat-icon">🪙</div>
+            <div class="stat-info">
+              <span class="stat-label">金币</span>
+              <strong class="stat-value" id="coinCount">0</strong>
+            </div>
+          </div>
+          <div class="stat-card star-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-info">
+              <span class="stat-label">星星</span>
+              <strong class="stat-value" id="starCount">0</strong>
+            </div>
+          </div>
+          <div class="stat-card partner-card">
+            <div class="stat-icon" id="partnerIcon">🌱</div>
+            <div class="stat-info">
+              <span class="stat-label">伙伴好感</span>
+              <strong class="stat-value" id="partnerAffection">0%</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-header">
+            <span class="progress-title">成长进度</span>
+            <span class="progress-level" id="progressLevel">社恐小白</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-track">
+              <div class="progress-fill" id="progressFill"></div>
+              <div class="progress-markers">
+                <div class="marker active" title="社恐小白"></div>
+                <div class="marker" title="尴尬逃跑者"></div>
+                <div class="marker" title="普通聊天员"></div>
+                <div class="marker" title="自然社交者"></div>
+                <div class="marker" title="气场稳定者"></div>
+                <div class="marker" title="社交松弛大神"></div>
+              </div>
+            </div>
+            <div class="progress-labels">
+              <span>小白</span>
+              <span>逃跑者</span>
+              <span>聊天员</span>
+              <span>社交者</span>
+              <span>稳定者</span>
+              <span>大神</span>
+            </div>
+          </div>
+          <div class="exp-info">
+            <span id="expCurrent">156</span>
+            <span>/</span>
+            <span id="expNext">500</span>
+            <span class="exp-label">EXP</span>
+            <button class="claim-btn" id="claimBtn">领取奖励 +20 EXP</button>
+          </div>
+        </div>
+
+        <div class="tabs-container">
+          <div class="tabs-header">
+            <button class="tab-btn active" data-tab="companion">💬 陪伴</button>
+            <button class="tab-btn" data-tab="achievements">🏆 成就</button>
+            <button class="tab-btn" data-tab="medals">🎖️ 勋章</button>
+            <button class="tab-btn" data-tab="partner">🦋 伙伴</button>
+            <button class="tab-btn" data-tab="report">📊 成长报告</button>
+            <button class="tab-btn" data-tab="shop">🛒 商店</button>
+          </div>
+          
+          <div class="tabs-content">
+            <div class="tab-panel active" id="companion-panel">
+              <div class="companion-section">
+                <div class="companion-header">
+                  <div class="current-companion" id="currentCompanion">
+                    <div class="companion-avatar" id="companionAvatar">👩‍🎓</div>
+                    <div class="companion-info">
+                      <h3 id="companionName">温柔学姐</h3>
+                      <p id="companionRole">温暖鼓励型</p>
+                    </div>
+                    <button class="change-companion-btn" id="changeCompanionBtn">换一个</button>
+                  </div>
+                </div>
+                
+                <div class="chat-container" id="chatContainer">
+                  <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                      <div class="message-avatar">👩‍🎓</div>
+                      <div class="message-bubble">
+                        <p>嗨~ 今天也要加油哦！你已经很棒了！✨</p>
+                      </div>
+                    </div>
+                    <div class="message bot-message">
+                      <div class="message-avatar">👩‍🎓</div>
+                      <div class="message-bubble">
+                        <p>今天的社交任务是：试着和一个陌生人打个招呼吧~</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="和你的陪伴说说话..." />
+                    <button class="send-btn" id="sendBtn">发送</button>
+                  </div>
+                </div>
+
+                <div class="companion-actions">
+                  <button class="action-btn" id="encourageBtn">💪 求鼓励</button>
+                  <button class="action-btn" id="moodBtn">😌 分析情绪</button>
+                  <button class="action-btn" id="adviceBtn">💡 聊天建议</button>
+                  <button class="action-btn" id="taskBtn">📋 每日任务</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-panel hidden" id="achievements-panel">
+              <div class="achievements-grid" id="achievementsGrid"></div>
+            </div>
+            
+            <div class="tab-panel hidden" id="medals-panel">
+              <div class="medals-grid" id="medalsGrid"></div>
+            </div>
+            
+            <div class="tab-panel hidden" id="partner-panel">
+              <div class="partner-card">
+                <div class="partner-avatar" id="partnerAvatar">🌱</div>
+                <div class="partner-info">
+                  <h3 id="partnerName">等待相遇</h3>
+                  <p id="partnerLevel">Lv.1 练习伙伴</p>
+                </div>
+                <div class="partner-affection-bar">
+                  <div class="affection-fill" id="affectionFill"></div>
+                </div>
+                <div class="partner-dialog" id="partnerDialog">开始你的第一次练习吧！🌱</div>
+                <div class="partner-actions">
+                  <button class="partner-action-btn" id="feedBtn">🍪 投喂</button>
+                  <button class="partner-action-btn" id="talkBtn">💬 聊天</button>
+                  <button class="partner-action-btn" id="playBtn">🎮 玩耍</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-panel hidden" id="report-panel">
+              <div class="report-section-container">
+                <div class="report-tabs">
+                  <button class="report-tab active" data-report="daily">今日报告</button>
+                  <button class="report-tab" data-report="weekly">本周周报</button>
+                </div>
+                
+                <div id="dailyReportContent" class="report-content">
+                  <div class="report-header">
+                    <h3>📅 今日社交状态</h3>
+                    <p class="report-date" id="reportDate"></p>
+                  </div>
+                  
+                  <div class="report-metrics">
+                    <div class="metric-card glass-card">
+                      <div class="metric-icon">😰</div>
+                      <div class="metric-info">
+                        <span class="metric-label">焦虑指数</span>
+                        <strong class="metric-value" id="todayAnxiety">75</strong>
+                      </div>
+                      <div class="metric-trend" id="anxietyTrend">-5</div>
+                    </div>
+                    
+                    <div class="metric-card glass-card">
+                      <div class="metric-icon">💭</div>
+                      <div class="metric-info">
+                        <span class="metric-label">内耗程度</span>
+                        <strong class="metric-value" id="todayOverthink">65</strong>
+                      </div>
+                      <div class="metric-trend" id="overthinkTrend">-3</div>
+                    </div>
+                    
+                    <div class="metric-card glass-card">
+                      <div class="metric-icon">💪</div>
+                      <div class="metric-info">
+                        <span class="metric-label">勇气值</span>
+                        <strong class="metric-value" id="todayCourage">35</strong>
+                      </div>
+                      <div class="metric-trend positive" id="courageTrend">+8</div>
+                    </div>
+                    
+                    <div class="metric-card glass-card">
+                      <div class="metric-icon">🎯</div>
+                      <div class="metric-info">
+                        <span class="metric-label">自信指数</span>
+                        <strong class="metric-value" id="todayConfidence">50</strong>
+                      </div>
+                      <div class="metric-trend positive" id="confidenceTrend">+5</div>
+                    </div>
+                    
+                    <div class="metric-card glass-card">
+                      <div class="metric-icon">🗣️</div>
+                      <div class="metric-info">
+                        <span class="metric-label">表达能力</span>
+                        <strong class="metric-value" id="todayExpression">60</strong>
+                      </div>
+                      <div class="metric-trend positive" id="expressionTrend">+3</div>
+                    </div>
+                    
+                    <div class="metric-card glass-card">
+                      <div class="metric-icon">🔄</div>
+                      <div class="metric-info">
+                        <span class="metric-label">回避次数</span>
+                        <strong class="metric-value" id="todayAvoid">0</strong>
+                      </div>
+                      <div class="metric-trend" id="avoidTrend">-2</div>
+                    </div>
+                  </div>
+                  
+                  <div class="behavior-analysis glass-card">
+                    <h4>🎭 行为模式分析</h4>
+                    <div id="behaviorAnalysis">
+                      <p>继续练习以解锁行为分析...</p>
+                    </div>
+                  </div>
+                  
+                  <div class="growth-tips glass-card">
+                    <h4>💡 成长建议</h4>
+                    <div id="growthTips">
+                      <ul>
+                        <li>每天练习3次以上，效果更佳</li>
+                        <li>尝试不同场景，全面提升社交能力</li>
+                        <li>语音练习可以帮助你更好地表达</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="weeklyReportContent" class="report-content hidden">
+                  <div class="report-header">
+                    <h3>📆 社交成长周报</h3>
+                    <p class="report-date" id="weekDateRange"></p>
+                  </div>
+                  
+                  <div class="weekly-summary glass-card">
+                    <div class="summary-stats">
+                      <div class="summary-stat">
+                        <span class="stat-number" id="weekPracticeCount">0</span>
+                        <span class="stat-label">练习次数</span>
+                      </div>
+                      <div class="summary-stat">
+                        <span class="stat-number" id="weekExpGained">0</span>
+                        <span class="stat-label">获得经验</span>
+                      </div>
+                      <div class="summary-stat">
+                        <span class="stat-number" id="weekStreak">0</span>
+                        <span class="stat-label">连续天数</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="chart-container glass-card">
+                    <h4>📈 焦虑指数变化</h4>
+                    <div class="simple-chart" id="anxietyChart"></div>
+                  </div>
+                  
+                  <div class="chart-container glass-card">
+                    <h4>📈 勇气值变化</h4>
+                    <div class="simple-chart" id="courageChart"></div>
+                  </div>
+                  
+                  <div class="chart-container glass-card">
+                    <h4>📈 表达能力变化</h4>
+                    <div class="simple-chart" id="expressionChart"></div>
+                  </div>
+                  
+                  <div class="weekly-insights glass-card">
+                    <h4>🔍 本周洞察</h4>
+                    <div id="weeklyInsights">
+                      <p>完成更多练习以解锁周报洞察...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="tab-panel hidden" id="shop-panel">
+              <div class="shop-grid" id="shopGrid"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <button id="fixedModeBtn" class="action-card fixed-action">
+            <div class="action-icon">🎭</div>
+            <div class="action-content">
+              <strong>AI社交训练场</strong>
+              <em>沉浸式真实社交模拟，13+场景练习</em>
+            </div>
+            <div class="action-arrow">→</div>
+          </button>
+          <button id="aiModeBtn" class="action-card ai-action">
+            <div class="action-icon">✍️</div>
+            <div class="action-content">
+              <strong>自由作答评分</strong>
+              <em>AI生成场景，自由表达获评分</em>
+            </div>
+            <div class="action-arrow">→</div>
+          </button>
+          <button id="voiceModeBtn" class="action-card voice-action">
+            <div class="action-icon">🎤</div>
+            <div class="action-content">
+              <strong>语音社交训练</strong>
+              <em>实时语音对话，分析聊天习惯</em>
+            </div>
+            <div class="action-arrow">→</div>
+          </button>
+        </div>
+
+        <div class="daily-mission">
+          <div class="mission-header">
+            <span class="mission-title">📋 今日任务</span>
+            <span class="mission-progress" id="missionProgress">2/3</span>
+          </div>
+          <div class="mission-list" id="missionList">
+            <div class="mission-item completed">
+              <span class="mission-check">✓</span>
+              <span class="mission-text">完成1次选择题练习</span>
+              <span class="mission-reward">+15 EXP</span>
+            </div>
+            <div class="mission-item completed">
+              <span class="mission-check">✓</span>
+              <span class="mission-text">完成1次AI自由作答</span>
+              <span class="mission-reward">+25 EXP</span>
+            </div>
+            <div class="mission-item">
+              <span class="mission-check">○</span>
+              <span class="mission-text">分享今日练习到社交平台</span>
+              <span class="mission-reward">+30 EXP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="random-event" id="randomEvent" style="display: none;">
+          <div class="event-header">
+            <span class="event-icon">🎲</span>
+            <span class="event-title">随机事件</span>
+          </div>
+          <div class="event-content" id="eventContent">
+            <p>你在路上遇到了一只迷路的小猫...</p>
+          </div>
+          <div class="event-actions">
+            <button class="event-btn" id="eventAccept">接受</button>
+            <button class="event-btn" id="eventDecline">跳过</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="characterModal" class="modal-overlay hidden">
+        <div class="modal-content character-select-modal">
+          <div class="modal-header">
+            <h2>选择你的陪伴</h2>
+            <button class="close-modal-btn" id="closeModalBtn">×</button>
+          </div>
+          <div class="character-grid">
+            <div class="character-card" data-character="gentle_senior">
+              <div class="character-avatar">👩‍🎓</div>
+              <div class="character-name">温柔学姐</div>
+              <div class="character-desc">温暖鼓励型</div>
+              <div class="character-preview">
+                "别紧张，慢慢来~"
+              </div>
+            </div>
+            <div class="character-card" data-character="calm_mentor">
+              <div class="character-avatar">🧑‍🏫</div>
+              <div class="character-name">冷静导师</div>
+              <div class="character-desc">理性分析型</div>
+              <div class="character-preview">
+                "让我们分析一下..."
+              </div>
+            </div>
+            <div class="character-card" data-character="sarcastic_friend">
+              <div class="character-avatar">😎</div>
+              <div class="character-name">毒舌好友</div>
+              <div class="character-desc">直言不讳型</div>
+              <div class="character-preview">
+                "怕什么？冲就完事了！"
+              </div>
+            </div>
+            <div class="character-card" data-character="shy_friend">
+              <div class="character-avatar">🥺</div>
+              <div class="character-name">社恐同类</div>
+              <div class="character-desc">感同身受型</div>
+              <div class="character-preview">
+                "我...我也很紧张..."
+              </div>
+            </div>
+            <div class="character-card" data-character="charismatic_guy">
+              <div class="character-avatar">✨</div>
+              <div class="character-name">高情商男神</div>
+              <div class="character-desc">体贴周到型</div>
+              <div class="character-preview">
+                "我懂你的感受..."
+              </div>
+            </div>
+            <div class="character-card" data-character="energetic_girl">
+              <div class="character-avatar">🌟</div>
+              <div class="character-name">元气少女</div>
+              <div class="character-desc">活力满满型</div>
+              <div class="character-preview">
+                "加油加油！你最棒！"
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="voiceShell" class="studio hidden">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Voice Practice Mode</p>
+            <h1 id="voiceTitle">语音社交训练</h1>
+          </div>
+          <div class="top-actions">
+            <button id="voiceHomeBtn" class="text-button" type="button">返回首页</button>
+            <button id="voiceResetBtn" class="icon-button" type="button" aria-label="重新开始" title="重新开始">↻</button>
+          </div>
+        </div>
+
+        <div class="voice-meters">
+          <div class="voice-meter-card">
+            <span>紧张程度</span>
+            <strong id="nervousnessValue">60</strong>
+            <div class="bar"><i id="nervousnessBar"></i></div>
+          </div>
+          <div class="voice-meter-card">
+            <span>表达流畅度</span>
+            <strong id="fluencyValue">75</strong>
+            <div class="bar"><i id="fluencyBar"></i></div>
+          </div>
+          <div class="voice-meter-card">
+            <span>语速 (字/分)</span>
+            <strong id="speechRateValue">120</strong>
+            <div class="bar"><i id="speechRateBar"></i></div>
+          </div>
+        </div>
+
+        <div class="voice-scene-stage">
+          <div class="voice-room-visual">
+            <div class="voice-avatar"><span></span></div>
+            <div class="voice-chat-bubble" id="voicePromptText">准备好了吗？点击下方按钮开始语音对话~</div>
+            <div class="voice-waveform" id="voiceWaveform"></div>
+          </div>
+          
+          <div class="voice-dialog-panel">
+            <p id="voiceSceneTag" class="scene-tag">语音练习</p>
+            <h2 id="voiceSceneTitle">与AI对话练习</h2>
+            <p id="voiceSceneDescription">通过语音与AI进行真实对话，系统会分析你的语气、停顿和表达习惯。</p>
+            
+            <div class="voice-record-area">
+              <button id="recordBtn" class="record-button" type="button">
+                <span class="record-icon">🎤</span>
+                <span class="record-text">开始录音</span>
+              </button>
+              <div class="record-status" id="recordStatus">点击按钮开始录音</div>
+              <div class="record-timer" id="recordTimer">00:00</div>
+            </div>
+
+            <div class="voice-transcript" id="voiceTranscript">
+              <div class="transcript-label">你的语音转写：</div>
+              <div class="transcript-content" id="transcriptContent">等待录音...</div>
+            </div>
+
+            <div class="voice-analysis" id="voiceAnalysis">
+              <div class="analysis-label">分析结果：</div>
+              <div class="analysis-content" id="analysisContent">完成录音后显示分析结果</div>
+            </div>
+
+            <button id="generateReportBtn" class="primary-button" type="button" disabled>生成聊天习惯报告</button>
+          </div>
+        </div>
+
+        <div class="voice-history-panel">
+          <h3>对话记录</h3>
+          <div class="voice-history-list" id="voiceHistoryList"></div>
+        </div>
+      </section>
+
+      <section id="reportModal" class="modal-overlay hidden">
+        <div class="modal-content report-modal">
+          <div class="modal-header">
+            <h2>📊 你的聊天习惯报告</h2>
+            <button class="close-modal-btn" id="closeReportModalBtn">×</button>
+          </div>
+          <div class="report-content" id="reportContent"></div>
+        </div>
+      </section>
+
+      <section id="practiceShell" class="studio hidden">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Virtual Practice Room</p>
+            <h1 id="modeTitle">社恐练习室</h1>
+          </div>
+          <div class="top-actions">
+            <button id="homeBtn" class="text-button" type="button">返回首页</button>
+            <button id="resetBtn" class="icon-button" type="button" aria-label="重新开始" title="重新开始">↻</button>
+          </div>
+        </div>
+
+        <div class="meter-grid" aria-label="练习状态">
+          <div class="meter-card anxiety-meter">
+            <span>社交焦虑值</span>
+            <strong id="anxietyValue">75</strong>
+            <div class="bar"><i id="anxietyBar"></i></div>
+            <div class="anxiety-indicator" id="anxietyIndicator">
+              <span class="indicator-label">较紧张</span>
+            </div>
+          </div>
+          <div class="meter-card">
+            <span>内耗</span>
+            <strong id="overthinkValue">65</strong>
+            <div class="bar"><i id="overthinkBar"></i></div>
+          </div>
+          <div class="meter-card">
+            <span>勇气值</span>
+            <strong id="courageValue">35</strong>
+            <div class="bar"><i id="courageBar"></i></div>
+          </div>
+        </div>
+
+        <section id="fixedSection">
+          <nav id="sceneList" class="scene-list" aria-label="场景选择"></nav>
+          <section class="scene-stage" aria-live="polite">
+            <div class="room-visual">
+              <div class="window"></div>
+              <div class="avatar"><span></span></div>
+              <div class="chat-bubble" id="promptText"></div>
+            </div>
+            <div class="dialog-panel">
+              <p id="sceneTag" class="scene-tag"></p>
+              <h2 id="sceneTitle"></h2>
+              <p id="sceneDescription"></p>
+              <div id="options" class="options"></div>
+              <div class="retry-section">
+                <button id="retryBtn" class="retry-button" type="button">
+                  <span>🔄</span> 再来一次（无限重来）
+                </button>
+                <p class="retry-hint">说错了没关系，尴尬是允许的！</p>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section id="aiSection" class="ai-panel hidden">
+          <div class="ai-toolbar">
+            <div>
+              <p class="eyebrow">AI Free Practice</p>
+              <h2>AI 自由作答</h2>
+            </div>
+            <span id="aiStatus" class="status-pill">检测中</span>
+          </div>
+          <div class="ai-controls">
+            <label for="topicSelect">练习主题</label>
+            <select id="topicSelect">
+              <option>拒绝别人</option>
+              <option>问老师问题</option>
+              <option>群里开口</option>
+              <option>打招呼</option>
+              <option>表达不同意见</option>
+            </select>
+            <button id="generateBtn" class="primary-button" type="button">生成问题</button>
+          </div>
+          <div class="ai-question" id="aiQuestion">
+            <strong>等待生成</strong>
+            <p>选择一个主题，让 AI 给你一个新的社交小场景。</p>
+          </div>
+          <textarea id="answerInput" rows="4" placeholder="在这里写下你会怎么回复..."></textarea>
+          <div class="answer-actions">
+            <button id="scoreBtn" class="primary-button" type="button" disabled>提交评分</button>
+            <span id="scoreHint">生成题目后即可作答</span>
+          </div>
+        </section>
+      </section>
+
+      <aside id="reportPanel" class="report-panel hidden">
+        <div class="report-head">
+          <p class="eyebrow">Practice Report</p>
+          <h2>练习报告</h2>
+        </div>
+        <dl class="report-list">
+          <div>
+            <dt>今日练习</dt>
+            <dd id="reportPractice">还没开始</dd>
+          </div>
+          <div>
+            <dt>表达等级</dt>
+            <dd id="reportLevel">待生成</dd>
+          </div>
+          <div>
+            <dt>获得技能</dt>
+            <dd id="reportSkill">选择一个场景开始</dd>
+          </div>
+          <div>
+            <dt>AI 评分</dt>
+            <dd id="reportScore">暂无</dd>
+          </div>
+        </dl>
+        <div id="feedbackBox" class="feedback-box">
+          <strong>小提示</strong>
+          <p>这里不是考试。你只是在练习把想法说得更清楚一点。</p>
+        </div>
+        <div class="history">
+          <h3>练习记录</h3>
+          <ol id="historyList"></ol>
+        </div>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
